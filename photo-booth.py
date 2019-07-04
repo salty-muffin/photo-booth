@@ -17,8 +17,8 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(GREEN_LED, GPIO.OUT)
 GPIO.setup(RED_LED, GPIO.OUT)
 # inputs
-shutter = Bounce(SHUTTER, GPIO.PUD_UP, GPIO.FALLING, 0.1)
-power = Bounce(POWER, GPIO.PUD_UP, GPIO.RISING, 2)
+shutter = Bounce(SHUTTER, GPIO.PUD_UP, 0.1)
+power = Bounce(POWER, GPIO.PUD_UP, 2)
 # set leds
 GPIO.output(RED_LED, GPIO.HIGH)
 time.sleep(1)
@@ -29,7 +29,11 @@ GPIO.output(GREEN_LED, GPIO.HIGH)
 # loop -------------------------------------------------------------------------
 run = True
 while run:
-    if shutter.read(): # when shutter button is pressed
+    # update the debounced inputs
+    shutter.update()
+    power.update()
+
+    if shutter.falling(): # when shutter button is pressed
         # led sequence
         GPIO.output(RED_LED, GPIO.HIGH)
         time.sleep(0.5)
@@ -50,7 +54,7 @@ while run:
         # shoot & print
         os.system('raspistill -n -t 200 -w 512 -h 384 -o - | lp')
 
-    elif power.read(): # when power butten is pressed
+    elif power.rising(): # when power butten is pressed
         # exit main loop
         run = False
 
