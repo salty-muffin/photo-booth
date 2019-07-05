@@ -6,7 +6,7 @@ RLED=23
 GLED=24
 
 linenum=0
-MAX_LINE_NUMBER=wc -l /home/pi/phone-booth/compliments.txt | awk '{ print $1 }'
+MAX_LINE_NUMBER=$(wc -l /home/pi/phone-booth/compliments.txt | awk '{ print $1 }')
 # debug
 echo $MAX_LINE_NUMBER
 
@@ -51,7 +51,7 @@ do
 
 
     linenum=$linenum+1
-    line=sed -n ${linenum}p /home/pi/phone-booth/compliments.txt
+    line=$(sed -n ${linenum}p /home/pi/phone-booth/compliments.txt)
     if [ $linenum -eq $MAX_LINE_NUMBER ]; then
       linenum=0
       # debug
