@@ -45,7 +45,15 @@ do
     gpio -g write $RLED 0
 
     # shoot and print
+    echo "Gorgeous!" | lp
+    sleep 0.2
 		raspistill -n -t 200 -w 512 -h 384 -o - | lp
+    sleep 3
+    for i in `seq 1 5`;
+    do
+      echo " " | lp
+      sleep 0.2
+    done
 
     # wait for printing
 		sleep 5
