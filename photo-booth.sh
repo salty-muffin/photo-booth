@@ -11,6 +11,9 @@ gpio -g mode  $HALT    up
 gpio -g mode  $RLED    out
 gpio -g mode  $GLED    out
 
+# debug
+echo "starting photo booth"
+
 # Flash red LED on startup to indicate ready state
 for i in `seq 1 5`;
 do
@@ -45,6 +48,8 @@ do
     gpio -g write $RLED 0
 
     # shoot and print
+    # debug
+    echo "catching your smile"
 		raspistill -n -t 200 -w 512 -h 384 -o - | lp
 
     # wait for printing
@@ -57,6 +62,7 @@ do
 		starttime=$(date +%s)
 		while [ $(gpio -g read $HALT) -eq 0 ]; do
 			if [ $(($(date +%s)-starttime)) -ge 2 ]; then
+        echo "shutting down"
         gpio -g write $RLED 1
 				gpio -g write $GLED 0
 				shutdown -h now
