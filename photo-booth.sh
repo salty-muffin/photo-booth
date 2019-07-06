@@ -7,8 +7,6 @@ GLED=24
 
 linenum=0
 MAX_LINE_NUMBER=$(wc -l /home/pi/photo-booth/compliments.txt | awk '{ print $1 }')
-# debug
-echo $MAX_LINE_NUMBER
 
 # Initialize GPIO states
 gpio -g mode  $SHUTTER up
@@ -49,18 +47,13 @@ do
     sleep 1
     gpio -g write $RLED 0
 
-
     linenum=$((linenum+1))
     line=$(sed -n ${linenum}p /home/pi/photo-booth/compliments.txt)
     if [ $linenum -eq $MAX_LINE_NUMBER ]; then
       linenum=0
-      # debug
-      echo $linenum
     fi
 
     echo "$line" | lp
-    # debug
-    echo $line
 		raspistill -n -t 200 -w 512 -h 384 -o - | lp
     for i in `seq 1 4`;
     do
