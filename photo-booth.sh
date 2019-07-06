@@ -57,7 +57,7 @@ do
 		raspistill -n -t 200 -w 512 -h 384 -o - | lp
     for i in `seq 1 4`;
     do
-      echo $'\x1bJ' | lp
+      echo " " | lp
     done
 
     # wait for printing
