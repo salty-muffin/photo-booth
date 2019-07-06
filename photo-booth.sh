@@ -54,7 +54,7 @@ do
     fi
 
     echo "$line" | lp
-		raspistill -n -t 200 -w 512 -h 384 -o - | lp
+		raspistill -n -t 200 -w 384 -h 512 -o - | lp
     for i in `seq 1 4`;
     do
       echo " " | lp
