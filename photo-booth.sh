@@ -56,6 +56,7 @@ do
     echo "$line" | lp
 		raspistill -n -t 200 -w 384 -h 512 -o - | lp
 		lp -o orientation-requested=5 /home/pi/photo-booth/blank.png
+		lp -o orientation-requested=5 /home/pi/photo-booth/blank.png
 
     # wait for printing
 		sleep 5
