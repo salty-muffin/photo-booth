@@ -55,6 +55,7 @@ do
 
     echo "$line" | lp
 		raspistill -n -t 200 -w 384 -h 512 -o - | lp
+		lp -o orientation-requested=5 /home/pi/photo-booth/blank.png
     for i in `seq 1 4`;
     do
       echo " " | lp
