@@ -3,4 +3,4 @@ a box that lets you take a photo with a raspberry pi camera and print it out as 
 
 ## to do
 * [x] do I want to flip the photo
-* [ ] create bigger compliments.txt
+* [x] create bigger compliments.txt
